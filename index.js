@@ -8,11 +8,11 @@ module.exports = function(homebridge) {
   Service = homebridge.hap.Service;
   Characteristic = homebridge.hap.Characteristic;
   HomebridgeAPI = homebridge;
-  homebridge.registerAccessory("homebridge-dummy", "DummySwitch", DummySwitch);
+  homebridge.registerAccessory("homebridge-dummy", "DummyWindowCovering", DummyWindowCovering);
 }
 
 
-function DummySwitch(log, config) {
+function DummyWindowCovering(log, config) {
   this.log = log;
   this.name = config.name;
   this.stateful = config.stateful;
@@ -20,7 +20,7 @@ function DummySwitch(log, config) {
   this.time = config.time ? config.time : 1000;		
   this.resettable = config.resettable;
   this.timer = null;
-  this._service = new Service.Switch(this.name);
+  this._service = new Service.WindowCovering(this.name);
   
   this.informationService = new Service.AccessoryInformation();
   this.informationService
@@ -48,11 +48,11 @@ function DummySwitch(log, config) {
   }
 }
 
-DummySwitch.prototype.getServices = function() {
+DummyWindowCovering.prototype.getServices = function() {
   return [this.informationService, this._service];
 }
 
-DummySwitch.prototype._setOn = function(on, callback) {
+DummyWindowCovering.prototype._setOn = function(on, callback) {
 
   this.log("Setting switch to " + on);
 
